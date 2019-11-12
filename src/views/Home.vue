@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Nuvens />
+    <div class="center">
+      <Unigotchi />
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue';
+import Nuvens from '@/components/Nuvens.vue';
+import Unigotchi from '@/components/Unigotchi.vue';
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
+    Nuvens,
+    Unigotchi,
   },
 };
 </script>
+
+<style>
+
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+</style>
