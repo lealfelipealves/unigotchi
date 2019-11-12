@@ -8,9 +8,9 @@
       </div>
 
       <div class='list-buttons'>
-        <button type="button">Status</button>
-        <button type="button" class="wrap-1">Select</button>
-        <button type="button">Reset</button>
+        <button type="button" @click="addFun()">Fun</button>
+        <button type="button" class="wrap-1" @click="addSleep()">Sleep</button>
+        <button type="button" @click="addEat()">Eat</button>
         <!--<button type="button">Decide</button>
         <button type="button">Cancel</button>-->
       </div>
@@ -23,6 +23,27 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      fun: 0,
+      sleep: 0,
+      eat: 0,
+    };
+  },
+  methods: {
+    addFun() {
+      this.fun = this.fun + 1;
+      console.log('fun', this.fun);
+    },
+    addEat() {
+      this.eat = this.eat + 1;
+      console.log('eat', this.eat);
+    },
+    addSleep() {
+      this.sleep = this.sleep + 1;
+      console.log('sleep', this.sleep);
+    },
   },
 };
 </script>
