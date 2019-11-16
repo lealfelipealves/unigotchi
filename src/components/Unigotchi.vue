@@ -73,13 +73,18 @@ export default {
   },
 
   methods: {
-    fetchUsers() {
-      const baseURI = 'https://jsonplaceholder.typicode.com/users';
-      this.$http.get(baseURI)
-        .then((result) => {
-          this.users = result.data;
-          console.log(this.users);
-        });
+    ready() {
+      this.loadData();
+
+      setInterval(() => {
+        this.loadData();
+      }, 30000);
+    },
+    loadData() {
+      console.log('teste');
+      // $.get('/api/data', function (response) {
+      //   this.items = response.items;
+      // }.bind(this));
     },
 
     addFun() {
@@ -96,6 +101,8 @@ export default {
     },
   },
   created() {
+    // var database = firebase.database();
+    this.ready();
     axios.get('http://127.0.0.1:1880/receber')
       .then((response) => {
         console.log(response);
