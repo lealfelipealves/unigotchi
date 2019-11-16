@@ -144,9 +144,9 @@ export default {
 
   .avatar {
     position: absolute;
-  width: 240px;
-  height: 240px;
-    background: url('../assets/uni-6.svg');
+    width: 240px;
+    height: 240px;
+    background: url('../assets/unigotchi_desgin-07.svg');
     background-size: cover;
 
   }
@@ -155,18 +155,28 @@ export default {
     position: absolute;
     top:0;
     right:0;
+    background: url('../assets/unigotchi_desgin-14.svg');
   }
 
   .eat {
     position: absolute;
     bottom:0;
     right:0;
+    background: url('../assets/unigotchi_desgin-12.svg');
   }
 
   .sleep {
     position: absolute;
     bottom:0;
     left:0;
+    background: url('../assets/unigotchi_desgin-13.svg');
+  }
+
+  .life {
+    position: absolute;
+    top:0;
+    left:0;
+    background: url('../assets/unigotchi_desgin-11.svg');
   }
 
   .status {
@@ -179,11 +189,12 @@ export default {
       margin: 0;
 
       li {
-        margin:5px;
-        width: 5px;
-        height: 5px;
-        background-color: red;
+        width: 18px;
+        height: 15px;
+        background-repeat: no-repeat;
+        background-size: cover;
       }
+
     }
   }
 
