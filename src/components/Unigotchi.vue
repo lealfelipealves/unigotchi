@@ -1,10 +1,44 @@
 <template>
   <div class="hello">
+
     <div class='case'>
       <div class='title'>UNIGOTCHI</div>
 
       <div class='screen'>
-
+        <div class="avatar"></div>
+        <div class="status life">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+        <div class="status eat">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul></div>
+        <div class="status fun">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul></div>
+        <div class="status sleep">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul></div>
       </div>
 
       <div class='list-buttons'>
@@ -19,6 +53,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -31,7 +67,21 @@ export default {
       eat: 0,
     };
   },
+
+  mounted() {
+    this.fetchUsers();
+  },
+
   methods: {
+    fetchUsers() {
+      const baseURI = 'https://jsonplaceholder.typicode.com/users';
+      this.$http.get(baseURI)
+        .then((result) => {
+          this.users = result.data;
+          console.log(this.users);
+        });
+    },
+
     addFun() {
       this.fun = this.fun + 1;
       console.log('fun', this.fun);
@@ -44,6 +94,17 @@ export default {
       this.sleep = this.sleep + 1;
       console.log('sleep', this.sleep);
     },
+  },
+  created() {
+    axios.get('http://127.0.0.1:1880/receber')
+      .then((response) => {
+        console.log(response);
+        // JSON responses are automatically parsed.
+        this.posts = response.data;
+      })
+      .catch((e) => {
+        this.errors.push(e);
+      });
   },
 };
 </script>
@@ -74,14 +135,59 @@ export default {
   text-shadow: 2px 2px 1px rgba(77, 9, 50, 0.75);
 }
 .screen {
-  position: absolute;
+  position: relative;
   width: 240px;
   height: 240px;
-  background: url('../assets/uni-6.svg');
-  background-size: cover;
   /*background: #a9e4f2;
   border-radius: 10%;
   box-shadow: inset -2px 2px 0 #0076a4;*/
+
+  .avatar {
+    position: absolute;
+  width: 240px;
+  height: 240px;
+    background: url('../assets/uni-6.svg');
+    background-size: cover;
+
+  }
+
+  .fun {
+    position: absolute;
+    top:0;
+    right:0;
+  }
+
+  .eat {
+    position: absolute;
+    bottom:0;
+    right:0;
+  }
+
+  .sleep {
+    position: absolute;
+    bottom:0;
+    left:0;
+  }
+
+  .status {
+
+    ul {
+      display: flex;
+      flex-wrap: nowrap;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin:5px;
+        width: 5px;
+        height: 5px;
+        background-color: red;
+      }
+    }
+  }
+
+
 }
 
 .list-buttons {
