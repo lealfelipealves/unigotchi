@@ -53,7 +53,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 export default {
   name: 'HelloWorld',
@@ -62,56 +61,57 @@ export default {
   },
   data() {
     return {
-      fun: 0,
-      sleep: 0,
-      eat: 0,
+      unigotchi: {
+        diversao: {
+          value: 5,
+        },
+        fome: {
+          value: 0,
+        },
+        sono: {
+          value: 5,
+        },
+        vida: {
+          value: 5,
+        },
+      },
     };
   },
 
   mounted() {
-    this.fetchUsers();
+    this.ready();
+    // this.apiLoadUnigotchi();
   },
 
   methods: {
+
+    apiLoadUnigotchi() {
+      const baseURI = 'http://127.0.0.1:1880/status';
+
+      this.$http.get(baseURI)
+        .then((result) => {
+          this.users = result.data;
+          console.log(this.users);
+        });
+    },
+
     ready() {
-      this.loadData();
+      this.apiLoadUnigotchi();
 
       setInterval(() => {
-        this.loadData();
+        this.apiLoadUnigotchi();
       }, 30000);
     },
-    loadData() {
-      console.log('teste');
-      // $.get('/api/data', function (response) {
-      //   this.items = response.items;
-      // }.bind(this));
-    },
 
-    addFun() {
-      this.fun = this.fun + 1;
-      console.log('fun', this.fun);
+    addDiversao() {
+      this.unigotchi.diversao.value += 1;
     },
-    addEat() {
-      this.eat = this.eat + 1;
-      console.log('eat', this.eat);
+    addFome() {
+      this.unigotchi.fome.value += 1;
     },
-    addSleep() {
-      this.sleep = this.sleep + 1;
-      console.log('sleep', this.sleep);
+    addSono() {
+      this.unigotchi.sono.value += 1;
     },
-  },
-  created() {
-    // var database = firebase.database();
-    this.ready();
-    axios.get('http://127.0.0.1:1880/receber')
-      .then((response) => {
-        console.log(response);
-        // JSON responses are automatically parsed.
-        this.posts = response.data;
-      })
-      .catch((e) => {
-        this.errors.push(e);
-      });
   },
 };
 </script>
