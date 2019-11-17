@@ -8,43 +8,30 @@
         <div class="avatar"></div>
         <div class="status life">
           <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li v-for="index in unigotchi.vida.value" :key="index"></li>
           </ul>
         </div>
         <div class="status eat">
           <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul></div>
+            <li v-for="index in unigotchi.fome.value" :key="index"></li>
+          </ul>
+        </div>
         <div class="status fun">
           <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul></div>
+            <li v-for="index in unigotchi.diversao.value" :key="index"></li>
+          </ul>
+        </div>
         <div class="status sleep">
           <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul></div>
+            <li v-for="index in unigotchi.sono.value" :key="index"></li>
+          </ul>
+        </div>
       </div>
 
       <div class='list-buttons'>
-        <button type="button" @click="addFun()">Fun</button>
-        <button type="button" class="wrap-1" @click="addSleep()">Sleep</button>
-        <button type="button" @click="addEat()">Eat</button>
+        <button type="button" @click="addDiversao()">Fun</button>
+        <button type="button" class="wrap-1" @click="addSono()">Sleep</button>
+        <button type="button" @click="addFome()">Eat</button>
         <!--<button type="button">Decide</button>
         <button type="button">Cancel</button>-->
       </div>
@@ -63,16 +50,16 @@ export default {
     return {
       unigotchi: {
         diversao: {
-          value: 5,
+          value: null,
         },
         fome: {
-          value: 0,
+          value: null,
         },
         sono: {
-          value: 5,
+          value: null,
         },
         vida: {
-          value: 5,
+          value: null,
         },
       },
     };
@@ -86,12 +73,10 @@ export default {
   methods: {
 
     apiLoadUnigotchi() {
-      const baseURI = 'http://127.0.0.1:1880/status';
-
-      this.$http.get(baseURI)
+      this.$http.get(`${this.$baseURI}/status`)
         .then((result) => {
-          this.users = result.data;
-          console.log(this.users);
+          this.unigotchi = result.data;
+          console.log(this.unigotchi);
         });
     },
 
@@ -104,13 +89,34 @@ export default {
     },
 
     addDiversao() {
-      this.unigotchi.diversao.value += 1;
+      if (this.unigotchi.diversao.value < 6) {
+        this.unigotchi.diversao.value += 1;
+        this.$http.post(`${this.$baseURI}/diversao`, { value: this.unigotchi.diversao.value })
+          .then((result) => {
+            this.unigotchi = result.data;
+            console.log(this.unigotchi);
+          });
+      }
     },
     addFome() {
-      this.unigotchi.fome.value += 1;
+      if (this.unigotchi.fome.value < 6) {
+        this.unigotchi.fome.value += 1;
+        this.$http.post(`${this.$baseURI}/fome`, { value: this.unigotchi.fome.value })
+          .then((result) => {
+            this.unigotchi = result.data;
+            console.log(this.unigotchi);
+          });
+      }
     },
     addSono() {
-      this.unigotchi.sono.value += 1;
+      if (this.unigotchi.sono.value < 6) {
+        this.unigotchi.sono.value += 1;
+        this.$http.post(`${this.$baseURI}/sono`, { value: this.unigotchi.sono.value })
+          .then((result) => {
+            this.unigotchi = result.data;
+            console.log(this.unigotchi);
+          });
+      }
     },
   },
 };
@@ -162,32 +168,47 @@ export default {
     position: absolute;
     top:0;
     right:0;
-    background: url('../assets/unigotchi_desgin-14.svg');
+    ul {
+      li {
+        background: url('../assets/unigotchi_desgin-14.svg');
+      }
+    }
   }
 
   .eat {
     position: absolute;
     bottom:0;
     right:0;
-    background: url('../assets/unigotchi_desgin-12.svg');
+    ul {
+      li {
+        background: url('../assets/unigotchi_desgin-12.svg');
+      }
+    }
   }
 
   .sleep {
     position: absolute;
     bottom:0;
     left:0;
-    background: url('../assets/unigotchi_desgin-13.svg');
+    ul {
+      li {
+        background: url('../assets/unigotchi_desgin-13.svg');
+      }
+    }
   }
 
   .life {
     position: absolute;
     top:0;
     left:0;
-    background: url('../assets/unigotchi_desgin-11.svg');
+    ul {
+      li {
+        background: url('../assets/unigotchi_desgin-11.svg');
+      }
+    }
   }
 
   .status {
-
     ul {
       display: flex;
       flex-wrap: nowrap;

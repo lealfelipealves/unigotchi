@@ -4,6 +4,8 @@ import App from './App.vue';
 import router from './router';
 
 Vue.prototype.$http = axios;
+Vue.prototype.$baseURI = 'http://127.0.0.1:1880';
+
 Vue.config.productionTip = false;
 
 new Vue({
