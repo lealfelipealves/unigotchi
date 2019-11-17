@@ -5,61 +5,55 @@
       <div class='title'>UNIGOTCHI</div>
 
       <div class='screen'>
-        <div class="avatar"></div>
+        <avatar :unigotch="unigotchi" />
+
         <div class="status life">
-          <ul>
-            <li v-for="index in unigotchi.vida.value" :key="index"></li>
-          </ul>
+          <status tipo="life" :valor="unigotchi.vida.value" />
         </div>
         <div class="status eat">
-          <ul>
-            <li v-for="index in unigotchi.fome.value" :key="index"></li>
-          </ul>
+          <status tipo="eat" :valor="unigotchi.fome.value" />
         </div>
         <div class="status fun">
-          <ul>
-            <li v-for="index in unigotchi.diversao.value" :key="index"></li>
-          </ul>
+          <status tipo="fun" :valor="unigotchi.diversao.value" />
         </div>
         <div class="status sleep">
-          <ul>
-            <li v-for="index in unigotchi.sono.value" :key="index"></li>
-          </ul>
+          <status tipo="sleep" :valor="unigotchi.sono.value" />
         </div>
       </div>
 
       <div class='list-buttons'>
-        <button type="button" @click="addDiversao()">Fun</button>
-        <button type="button" class="wrap-1" @click="addSono()">Sleep</button>
-        <button type="button" @click="addFome()">Eat</button>
-        <!--<button type="button">Decide</button>
-        <button type="button">Cancel</button>-->
+        <button type="button" title="Diversão" @click="addDiversao()">Diversão</button>
+        <button type="button" title="Fome" class="wrap-1" @click="addFome()">Fome</button>
+        <button type="button" title="Sono"  @click="addSono()">Sono</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Status from '@/components/Status.vue';
+import Avatar from '@/components/Avatar.vue';
 
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String,
+  components: {
+    Avatar,
+    Status,
   },
   data() {
     return {
       unigotchi: {
         diversao: {
-          value: null,
+          value: 5,
         },
         fome: {
-          value: null,
+          value: 5,
         },
         sono: {
-          value: null,
+          value: 5,
         },
         vida: {
-          value: null,
+          value: 5,
         },
       },
     };
@@ -122,7 +116,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Bangers&display=swap');
 
@@ -138,6 +131,7 @@ export default {
   align-items: center;
   flex-wrap:wrap;
 }
+
 .title {
   position: absolute;
   top:75px;
@@ -146,7 +140,9 @@ export default {
   font-size: 45px;
   letter-spacing: 1px;
   text-shadow: 2px 2px 1px rgba(77, 9, 50, 0.75);
+  color: #fff;
 }
+
 .screen {
   position: relative;
   width: 240px;
@@ -155,78 +151,29 @@ export default {
   border-radius: 10%;
   box-shadow: inset -2px 2px 0 #0076a4;*/
 
-  .avatar {
+  .status {
     position: absolute;
-    width: 240px;
-    height: 240px;
-    background: url('../assets/unigotchi_desgin-07.svg');
-    background-size: cover;
-
-  }
-
-  .fun {
-    position: absolute;
-    top:0;
-    right:0;
-    ul {
-      li {
-        background: url('../assets/unigotchi_desgin-14.svg');
-      }
-    }
-  }
-
-  .eat {
-    position: absolute;
-    bottom:0;
-    right:0;
-    ul {
-      li {
-        background: url('../assets/unigotchi_desgin-12.svg');
-      }
-    }
-  }
-
-  .sleep {
-    position: absolute;
-    bottom:0;
-    left:0;
-    ul {
-      li {
-        background: url('../assets/unigotchi_desgin-13.svg');
-      }
-    }
   }
 
   .life {
-    position: absolute;
-    top:0;
-    left:0;
-    ul {
-      li {
-        background: url('../assets/unigotchi_desgin-11.svg');
-      }
-    }
+    top:5px;
+    left:5px;
   }
 
-  .status {
-    ul {
-      display: flex;
-      flex-wrap: nowrap;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-
-      li {
-        width: 18px;
-        height: 15px;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-
-    }
+  .fun {
+    top:5px;
+    right:5px;
   }
 
+  .sleep {
+    bottom:7px;
+    left:7px;
+  }
 
+  .eat {
+    bottom:7px;
+    right:7px;
+  }
 }
 
 .list-buttons {
@@ -234,6 +181,7 @@ export default {
   bottom: 35px;
   width:100%;
 }
+
 button {
   border:0;
   width:45px;
@@ -251,9 +199,6 @@ button {
 }
 .wrap-1 {
   padding-bottom: 25px !important;
-}
-.title {
-  color: #fff;
 }
 
 </style>
