@@ -95,7 +95,7 @@ export default {
       if (this.unigotchi.diversao.value < 6) {
         this.$http.post(`${this.$baseURI}/diversao`, { value: 5 })
           .then((result) => {
-            this.unigotchi = result.data;
+            this.unigotchi.diversao.value = result.data;
             console.log(this.unigotchi);
           });
       }
@@ -104,7 +104,7 @@ export default {
       if (this.unigotchi.fome.value < 6) {
         this.$http.post(`${this.$baseURI}/fome`, { value: 5 })
           .then((result) => {
-            this.unigotchi = result.data;
+            this.unigotchi.fome.value = result.data;
             console.log(this.unigotchi);
           });
       }
@@ -113,7 +113,7 @@ export default {
       if (this.unigotchi.sono.value < 6) {
         this.$http.post(`${this.$baseURI}/sono`, { value: 5 })
           .then((result) => {
-            this.unigotchi = result.data;
+            this.unigotchi.sono.value = result.data;
             console.log(this.unigotchi);
           });
       }
