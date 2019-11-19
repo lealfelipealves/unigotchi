@@ -18,14 +18,14 @@ export default {
     unigotchi(newVal) {
       if (newVal.vida.value < 1) {
         this.styleUnigotchi = 'rip';
-      } else if (newVal.vida.value = 1) {
+      } else if (newVal.vida.value === 1) {
         this.styleUnigotchi = 'triste-3';
-      } else if (newVal.vida.value = 2) {
+      } else if (newVal.vida.value === 2) {
         this.styleUnigotchi = 'triste-2';
-      } else if (newVal.vida.value = 3) {
+      } else if (newVal.vida.value === 3) {
         this.styleUnigotchi = 'triste-1';
       } else {
-        this.styleUnigotchi = 'alegre-3'
+        this.styleUnigotchi = 'alegre-3';
       }
     },
   },

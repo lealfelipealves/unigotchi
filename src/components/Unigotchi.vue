@@ -68,17 +68,13 @@ export default {
   methods: {
 
     apiResetUnigotchi() {
-      this.$http.get(`${this.$baseURI}/reset`)
-        .then((result) => {
-          console.log(result.data);
-        });
+      this.$http.get(`${this.$baseURI}/reset`);
     },
 
     apiLoadUnigotchi() {
       this.$http.get(`${this.$baseURI}/status`)
         .then((result) => {
           this.unigotchi = result.data;
-          console.log(this.unigotchi);
         });
     },
 
@@ -95,7 +91,6 @@ export default {
         this.$http.post(`${this.$baseURI}/diversao`, { value: 5 })
           .then((result) => {
             this.unigotchi.diversao.value = result.data;
-            console.log(this.unigotchi);
           });
       }
     },
@@ -104,7 +99,6 @@ export default {
         this.$http.post(`${this.$baseURI}/fome`, { value: 5 })
           .then((result) => {
             this.unigotchi.fome.value = result.data;
-            console.log(this.unigotchi);
           });
       }
     },
@@ -113,7 +107,6 @@ export default {
         this.$http.post(`${this.$baseURI}/sono`, { value: 5 })
           .then((result) => {
             this.unigotchi.sono.value = result.data;
-            console.log(this.unigotchi);
           });
       }
     },
