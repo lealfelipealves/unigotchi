@@ -7,7 +7,7 @@
       <div class='title'>UNIGOTCHI</div>
 
       <div class='screen'>
-        <avatar :unigotch="unigotchi" />
+        <avatar :unigotchi="unigotchi" />
 
         <div class="status life">
           <status tipo="life" :valor="unigotchi.vida.value" />
@@ -63,7 +63,6 @@ export default {
 
   mounted() {
     this.ready();
-    // this.apiLoadUnigotchi();
   },
 
   methods: {
