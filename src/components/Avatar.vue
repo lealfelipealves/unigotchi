@@ -24,6 +24,8 @@ export default {
         this.styleUnigotchi = 'triste-2';
       } else if (newVal.vida.value = 3) {
         this.styleUnigotchi = 'triste-1';
+      } else {
+        this.styleUnigotchi = 'alegre-3'
       }
     },
   },
