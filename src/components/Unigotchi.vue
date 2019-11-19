@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
 
+    <button class='btn-reset' @click="apiResetUnigotchi()">Reset</button>
+
     <div class='case'>
       <div class='title'>UNIGOTCHI</div>
 
@@ -22,9 +24,9 @@
       </div>
 
       <div class='list-buttons'>
-        <button type="button" title="Diversão" @click="addDiversao()">Diversão</button>
-        <button type="button" title="Fome" class="wrap-1" @click="addFome()">Fome</button>
-        <button type="button" title="Sono"  @click="addSono()">Sono</button>
+        <button class="btn" type="button" title="Diversão" @click="addDiversao()">Diversão</button>
+        <button class="btn wrap-1" type="button" title="Fome" @click="addFome()">Fome</button>
+        <button class="btn" type="button" title="Sono"  @click="addSono()">Sono</button>
       </div>
     </div>
   </div>
@@ -66,6 +68,13 @@ export default {
 
   methods: {
 
+    apiResetUnigotchi() {
+      this.$http.get(`${this.$baseURI}/reset`)
+        .then((result) => {
+          console.log(result.data);
+        });
+    },
+
     apiLoadUnigotchi() {
       this.$http.get(`${this.$baseURI}/status`)
         .then((result) => {
@@ -79,7 +88,7 @@ export default {
 
       setInterval(() => {
         this.apiLoadUnigotchi();
-      }, 30000);
+      }, 1000);
     },
 
     addDiversao() {
@@ -181,8 +190,18 @@ export default {
   bottom: 35px;
   width:100%;
 }
+.btn-reset {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 100px;
+  background: linear-gradient(top, white 5%, #f1f1f1 100%);
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+}
 
-button {
+.btn {
   border:0;
   width:45px;
   height:45px;
